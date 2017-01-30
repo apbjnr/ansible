@@ -1,0 +1,10 @@
+# Always start anible playbook with three dashes.
+---
+# specify remote host
+- hosts: fluxcapacitor.r00t.co.za
+# specify remote user (make sure your ssh key is copied onto the remote host / user)
+  remote_user: root
+# modules
+  tasks:
+       - name: install nano using yum
+         yum: name=nano state=latest
