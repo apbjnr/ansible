@@ -1,0 +1,6 @@
+---
+- hosts: fluxcapacitor.r00t.co.za
+  remote_user: root
+  tasks:
+       - name: Create file
+         file: path=/tmp/guava state=touch
