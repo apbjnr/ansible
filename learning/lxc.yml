@@ -1,0 +1,13 @@
+---
+- hosts: fluxcapacitor.r00t.co.za
+  remote_user: root
+  tasks:
+       - name: start lxc
+         lxc_container:
+           name=Ansible_Ubuntu_16.04
+           state=started
+
+# ping container (not icmp test)
+       - name: ping test
+         ping:
+
