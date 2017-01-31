@@ -1,5 +1,5 @@
 ---
-- hosts: fluxcapacitor.r00t.co.za
+- hosts: ansible-test-server
   remote_user: root
   tasks:
 
