@@ -1,0 +1,29 @@
+---
+- name: Install packages
+  pkgng:
+    name: ossec-hids-local
+    state: present
+
+- name: Install ossec.conf
+  template:
+    src: 'usr/local/ossec-hids/etc/ossec.conf'
+    dest: '/usr/local/ossec-hids/etc/ossec.conf'
+    mode: 0644
+
+- name: Install local_rules.xml
+  template:
+    src: 'usr/local/ossec-hids/rules/local_rules.xml'
+    dest: '/usr/local/ossec-hids/rules/local_rules.xml'
+  
+
+- name: Install ossec_rules.xml
+  template:
+    src: 'usr/local/ossec-hids/rules/ossec_rules.xml'
+    dest: '/usr/local/ossec-hids/rules/ossec_rules.xml'
+  
+
+- name: Enable ossec in /etc/rc.conf 
+  sysrc:
+    name: ossechids_enable
+    value: "YES"
+

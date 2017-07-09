@@ -1,0 +1,22 @@
+---
+- hosts: ansible-freebsd-server
+  gather_facts: false
+  remote_user: ansible
+  become_method: su
+  become: yes
+
+  roles:
+   - bootstrap
+
+- hosts: ansible-freebsd-server
+  remote_user: ansible
+  become: true
+  become_method: sudo
+
+  roles:
+   - update
+   - miscinstalls
+   - ntpd
+   - pf
+   - rc
+   - ossec-client

@@ -1,0 +1,21 @@
+---
+     - name: Bootstrapping pkg
+       raw: /usr/bin/env ASSUME_ALWAYS_YES=1 /usr/sbin/pkg bootstrap -f
+       
+     - name: Update pkg 
+       raw: pkg update
+
+     - name: install python
+       raw: /usr/sbin/pkg install -y python
+
+     - name: remove pyton binary
+       raw: rm -rf /usr/bin/python
+
+     - name: symlink python  
+       raw: /bin/ln -s /usr/local/bin/python /usr/bin/python
+
+     - name: install sudo
+       raw: /usr/sbin/pkg install -y sudo
+
+     - name: give ansible passwordless sudo on freebsd
+       raw: echo "ansible ALL=(ALL) NOPASSWD{{ ':' }} ALL" >> /usr/local/etc/sudoers

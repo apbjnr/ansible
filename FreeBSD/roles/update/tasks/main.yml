@@ -1,0 +1,31 @@
+---
+# Uncomment the below if you want to run this playbook individually.
+#- hosts: ansible-freebsd-server
+#  gather_facts: false
+#  remote_user: ansible
+#  become: yes
+#  tasks:
+
+        - name: Fetch any new FreeBSD updates
+          shell: freebsd-update --not-running-from-cron fetch
+          register: result_update
+          changed_when: "'No updates needed' not in result_update.stdout"
+
+        - debug: var=result_update
+          when: result_update.changed
+
+        - name: Install FreeBSD updates
+          shell: freebsd-update install
+          when: result_update.changed
+          register: result_update_install
+
+        - debug: var=result_update_install
+          when: result_update_install.changed
+
+        - name: Upgrade FreeBSD packages
+          shell: pkg upgrade
+          register: result_pkg
+          changed_when: "'Your packages are up to date' not in result_pkg.stdout"
+
+        - debug: var=result_pkg
+          when: result_pkg.changed

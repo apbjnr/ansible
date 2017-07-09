@@ -1,0 +1,27 @@
+---
+# Uncomment the below if you want to run this playbook individually.
+#- hosts: ansible-freebsd-server
+#  gather_facts: false
+#  remote_user: ansible
+#  become: yes
+#  tasks:
+
+        - name: install additional packages - preferences
+          pkgng:
+            name: bash,bash-completion,screen,rsync,wget,vim-lite,htop,open-vm-tools-nox11,nrpe
+            state: present
+
+        - name: update /etc/rc.conf for misctools
+          sysrc:
+            name: "{{ item.name }}"
+            value: "{{ item.value }}"
+          with_items:
+            - { name: vmware_guest_vmblock_enable, value: "YES" }
+            - { name: vmware_guest_vmhgfs_enable, value: "YES" }
+            - { name: vmware_guest_vmmemctl_enable, value: "YES" }
+            - { name: vmware_guest_vmxnet_enable, value: "YES"}
+            - { name: vmware_guestd_enable, value: "YES" }
+            - { name: nrpe2_enable, value: "YES"}
+
+        - name: Add line to fstab needed by bash
+          raw: echo "#Needed by Bash" >> /etc/fstab && echo "fdesc   /dev/fd         fdescfs         rw      0       0" >> /etc/fstab && mount -a

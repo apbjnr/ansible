@@ -1,0 +1,15 @@
+---
+# Uncomment the below if you want to run this playbook individually.
+#- hosts: ansible-freebsd-server
+#  gather_facts: false
+#  remote_user: ansible
+#  become: yes
+#  tasks:
+
+        - name: Install pf.conf
+          template:
+            src: '../template/etc/pf.conf'
+            dest: '/etc/pf.conf'
+            owner: root
+            group: wheel
+            mode: 0640

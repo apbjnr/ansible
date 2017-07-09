@@ -1,0 +1,123 @@
+<!-- @(#) $Id: ./etc/rules/local_rules.xml, 2011/09/08 dcid Exp $
+
+  -  Example of local rules for OSSEC.
+  -
+  -  Copyright (C) 2009 Trend Micro Inc.
+  -  All rights reserved.
+  -
+  -  This program is a free software; you can redistribute it
+  -  and/or modify it under the terms of the GNU General Public
+  -  License (version 2) as published by the FSF - Free Software
+  -  Foundation.
+  -
+  -  License details: http://www.ossec.net/en/licensing.html
+  -->
+
+
+<!-- Modify it at your will. -->
+
+<group name="local,syslog,">
+
+  <!-- Note that rule id 5711 is defined at the ssh_rules file
+    -  as a ssh failed login. This is just an example
+    -  since ip 1.1.1.1 shouldn't be used anywhere.
+    -  Level 0 means ignore.
+    -->
+  <rule id="100001" level="0">
+    <if_sid>5711</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>Example of rule that will ignore sshd </description>
+    <description>failed logins from IP 1.1.1.1.</description>
+  </rule>
+
+
+  <!-- This example will ignore ssh failed logins for the user name XYZABC.
+    -->
+  <!--
+  <rule id="100020" level="0">
+    <if_sid>5711</if_sid>
+    <user>XYZABC</user>
+    <description>Example of rule that will ignore sshd </description>
+    <description>failed logins for user XYZABC.</description>
+  </rule>
+  -->
+
+
+  <!-- Specify here a list of rules to ignore. -->
+  <!--
+  <rule id="100030" level="0">
+    <if_sid>12345, 23456, xyz, abc</if_sid>
+    <description>List of rules to be ignored.</description>
+  </rule>
+  -->
+
+    <rule id="100100" level="0">
+     <if_sid>1002</if_sid>
+     <program_name>zmd</program_name>
+     <options>no_email_alert</options>
+     <description>This is a rule created to ignore False Positive Events</description>
+</rule>
+
+<rule id="100101" level="0">
+     <if_sid>1002</if_sid>
+     <match>cdrom: open failed</match>
+     <options>no_email_alert</options>
+     <description>This is a rule created to ignore False Positive Events</description>
+</rule>
+
+<rule id="100102" level="2">
+     <if_sid>1002</if_sid>
+     <program_name>submountd</program_name>
+     <match>mount failure, No medium found</match>
+     <options>no_email_alert</options>
+     <description>This is a rule created to ignore False Positive Events</description>
+</rule>
+
+<rule id="100103" level="2">
+     <if_sid>1002</if_sid>
+     <program_name>submountd</program_name>
+     <match>mount failure, No such device or address</match>
+     <options>no_email_alert</options>
+     <description>This is a rule created to ignore False Positive Events</description>
+</rule>
+
+<rule id="100104" level="0">
+     <if_sid>1002</if_sid>
+     <program_name>zmd</program_name>
+     <options>no_email_alert</options>
+     <description>This is a rule created to ignore False Positive Events</description>
+</rule>
+
+<rule id="100105" level="0">
+     <if_sid>1002</if_sid>
+     <match>hda: packet command error: status=0x51 { DriveReady SeekComplete Error }</match>
+     <options>no_email_alert</options>
+     <description>This is a rule created to ignore False Positive Events</description>
+</rule>
+
+<rule id="100106" level="0">
+     <if_sid>1002</if_sid>
+     <match>hda: packet command error: error=0x50</match>
+     <options>no_email_alert</options>
+     <description>This is a rule created to ignore False Positive Events</description>
+</rule>
+
+<rule id="100107" level="0">
+     <if_sid>1002</if_sid>
+     <match>hda: packet command error: error=0x54 { AbortedCommand LastFailedSense=0x05 }</match>
+     <options>no_email_alert</options>
+     <description>This is a rule created to ignore False Positive Events</description>
+</rule>
+
+<rule id="100108" level="0">
+     <if_sid>1002</if_sid>
+     <match>ide: failed opcode was: unknown</match>
+     <options>no_email_alert</options>
+     <description>This is a rule created to ignore False Positive Events</description>
+</rule>
+
+
+</group> <!-- SYSLOG,LOCAL -->
+
+
+<!-- EOF -->
