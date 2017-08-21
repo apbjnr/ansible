@@ -7,13 +7,6 @@
 
   roles:
    - bootstrap
-
-- hosts: ansible-freebsd-server
-  remote_user: ansible
-  become: true
-  become_method: sudo
-
-  roles:
    - update
    - miscinstalls
    - ntpd
