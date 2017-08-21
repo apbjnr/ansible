@@ -1,5 +1,5 @@
 ---
-# Uncomment the below if you want to run this playbook individually.
+# Uncomment the below if you want to run this role as it's own playbook.
 #- hosts: ansible-freebsd-server
 #  gather_facts: false
 #  remote_user: ansible
@@ -8,7 +8,7 @@
 
         - name: install additional packages - preferences
           pkgng:
-            name: bash,bash-completion,screen,rsync,wget,vim-lite,htop,open-vm-tools-nox11,nrpe
+            name: bash,bash-completion,screen,rsync,wget,vim-lite,htop,open-vm-tools-nox11,nrpe,sudo
             state: present
 
         - name: update /etc/rc.conf for misctools
@@ -23,5 +23,12 @@
             - { name: vmware_guestd_enable, value: "YES" }
             - { name: nrpe2_enable, value: "YES"}
 
-        - name: Add line to fstab needed by bash
-          raw: echo "#Needed by Bash" >> /etc/fstab && echo "fdesc   /dev/fd         fdescfs         rw      0       0" >> /etc/fstab && mount -a
+
+        - blockinfile:
+            path: /etc/fstab
+            block: |
+              #Needed by Bash
+              fdesc   /dev/fd         fdescfs         rw      0       0
+
+        - name: remount /etc/fstab
+          raw: mount -a
