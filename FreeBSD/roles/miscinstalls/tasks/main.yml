@@ -6,29 +6,29 @@
 #  become: yes
 #  tasks:
 
-        - name: install additional packages - preferences
-          pkgng:
-            name: bash,bash-completion,screen,rsync,wget,vim-lite,htop,open-vm-tools-nox11,nrpe,sudo
-            state: present
+- name: install additional packages - preferences
+  pkgng:
+    name: bash,bash-completion,screen,rsync,wget,vim-lite,htop,open-vm-tools-nox11,nrpe,sudo
+    state: present
 
-        - name: update /etc/rc.conf for misctools
-          sysrc:
-            name: "{{ item.name }}"
-            value: "{{ item.value }}"
-          with_items:
-            - { name: vmware_guest_vmblock_enable, value: "YES" }
-            - { name: vmware_guest_vmhgfs_enable, value: "YES" }
-            - { name: vmware_guest_vmmemctl_enable, value: "YES" }
-            - { name: vmware_guest_vmxnet_enable, value: "YES"}
-            - { name: vmware_guestd_enable, value: "YES" }
-            - { name: nrpe2_enable, value: "YES"}
+- name: update /etc/rc.conf for misctools
+  sysrc:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  with_items:
+   - { name: vmware_guest_vmblock_enable, value: "YES" }
+   - { name: vmware_guest_vmhgfs_enable, value: "YES" }
+   - { name: vmware_guest_vmmemctl_enable, value: "YES" }
+   - { name: vmware_guest_vmxnet_enable, value: "YES"}
+   - { name: vmware_guestd_enable, value: "YES" }
+   - { name: nrpe2_enable, value: "YES"}
 
 
-        - blockinfile:
-            path: /etc/fstab
-            block: |
-              #Needed by Bash
-              fdesc   /dev/fd         fdescfs         rw      0       0
+   - blockinfile:
+       path: /etc/fstab
+       block: |
+         #Needed by Bash
+         fdesc   /dev/fd         fdescfs         rw      0       0
 
-        - name: remount /etc/fstab
-          raw: mount -a
+- name: remount /etc/fstab
+  raw: mount -a
