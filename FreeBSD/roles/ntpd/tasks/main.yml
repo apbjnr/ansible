@@ -6,15 +6,15 @@
 #  become: yes
 #  tasks:
 
-        - name: install ntp
-          pkgng:
-            name: ntp
-            state: present
+- name: install ntp
+  pkgng:
+    name: ntp
+    state: present
 
-        - name: copy default ntp.conf
-          template:
-            src: '../template/etc/ntp.conf'
-            dest: '/etc/ntp.conf'
+- name: copy default ntp.conf
+  template:
+    src: '../template/etc/ntp.conf'
+    dest: '/etc/ntp.conf'
         
-        - name: sync ntp
-          raw: ntpdate ntp.is.co.za
+- name: sync ntp
+  raw: ntpdate ntp.is.co.za
