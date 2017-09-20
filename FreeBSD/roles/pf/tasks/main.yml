@@ -6,10 +6,15 @@
 #  become: yes
 #  tasks:
 
-        - name: Install pf.conf
-          template:
-            src: '../template/etc/pf.conf'
-            dest: '/etc/pf.conf'
-            owner: root
-            group: wheel
-            mode: 0640
+## Gather facts
+
+- name: Update gather_facts
+  setup:
+
+- name: Install pf.conf
+  template:
+    src: '../template/etc/pf.conf'
+    dest: '/etc/pf.conf'
+    owner: root
+    group: wheel
+    mode: 0640
