@@ -1,12 +1,12 @@
 ---
-     - name: Bootstrapping pkg
-       raw: /usr/bin/env ASSUME_ALWAYS_YES=1 /usr/sbin/pkg bootstrap -f
+- name: Bootstrapping pkg
+  raw: /usr/bin/env ASSUME_ALWAYS_YES=1 /usr/sbin/pkg bootstrap -f
 
-     - name: install python
-       raw: /usr/sbin/pkg install -y python
+- name: install python
+  raw: /usr/sbin/pkg install -y python
 
-     - name: remove pyton binary
-       raw: rm -rf /usr/bin/python
+- name: remove pyton binary
+  raw: rm -rf /usr/bin/python
 
-     - name: symlink python  
-       raw: /bin/ln -s /usr/local/bin/python /usr/bin/python
+- name: symlink python  
+  raw: /bin/ln -s /usr/local/bin/python /usr/bin/python
