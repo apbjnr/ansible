@@ -41,6 +41,7 @@ At the time of this writing, only the syntax checking has been completed. The fo
 
  - ansible.cfg
  - .gitlab-ci.yml
+ - deploy.sh
  - syntaxcheck/
  - syntaxcheck/inventory
  - syntaxcheck/syntaxcheck.yml
