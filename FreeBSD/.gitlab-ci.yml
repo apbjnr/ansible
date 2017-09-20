@@ -1,0 +1,26 @@
+---
+variables:
+  SITE: "syntaxcheck.yml"
+
+stages:
+  - test
+  - staging
+  - production
+
+test: 
+  tags:
+    - ansible-cd
+  script:
+    # Run a syntax check against the role
+    - "ansible-playbook -i syntaxcheck/inventory syntaxcheck/$SITE --syntax-check"
+
+deploy-production:
+  stage: production
+  tags:
+    - ansible-cd
+  script:
+    # Write the role to /opt/ansible/roles so that it can be accessed by everyone in the `users` group.
+    - bash deploy.sh
+  only:
+    - master
+

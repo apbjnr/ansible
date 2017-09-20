@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  remote_user: root
+  roles:
+    - bootstrap
+    - update
+    - miscinstalls
+    - ntpd
+    - pf
+    - rc
+    - ossec-client
